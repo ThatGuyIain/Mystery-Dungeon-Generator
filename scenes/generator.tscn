@@ -1614,6 +1614,14 @@ layout_mode = 2
 placeholder_text = "60"
 max_length = 3
 
+[node name="Label" type="Label" parent="CanvasLayer/HBoxContainer2/VBoxContainer"]
+layout_mode = 2
+text = "Room Quantity"
+
+[node name="Room Quantity" type="LineEdit" parent="CanvasLayer/HBoxContainer2/VBoxContainer"]
+layout_mode = 2
+placeholder_text = "Max: 2500"
+
 [node name="Label4" type="Label" parent="CanvasLayer/HBoxContainer2/VBoxContainer"]
 layout_mode = 2
 text = "Subdivsion Depth: 4"
@@ -1627,17 +1635,6 @@ rounded = true
 tick_count = 10
 ticks_on_borders = true
 ticks_position = 3
-
-[node name="Label" type="Label" parent="CanvasLayer/HBoxContainer2/VBoxContainer"]
-layout_mode = 2
-text = "Room Quantity: 10"
-
-[node name="Max Rooms Slider" type="HSlider" parent="CanvasLayer/HBoxContainer2/VBoxContainer"]
-layout_mode = 2
-min_value = 5.0
-max_value = 2500.0
-value = 10.0
-rounded = true
 
 [node name="Label5" type="Label" parent="CanvasLayer/HBoxContainer2/VBoxContainer"]
 layout_mode = 2
@@ -1653,7 +1650,7 @@ text = "Generate Level"
 
 [connection signal="text_changed" from="CanvasLayer/HBoxContainer2/VBoxContainer/Map Width Box" to="." method="_on_map_width_box_text_changed"]
 [connection signal="text_changed" from="CanvasLayer/HBoxContainer2/VBoxContainer/Map Length Box" to="." method="_on_map_length_box_text_changed"]
+[connection signal="text_changed" from="CanvasLayer/HBoxContainer2/VBoxContainer/Room Quantity" to="." method="_on_room_quantity_text_changed"]
 [connection signal="value_changed" from="CanvasLayer/HBoxContainer2/VBoxContainer/Subdivison Slider" to="." method="_on_subdivison_slider_value_changed"]
-[connection signal="value_changed" from="CanvasLayer/HBoxContainer2/VBoxContainer/Max Rooms Slider" to="." method="_on_max_rooms_slider_value_changed"]
 [connection signal="value_changed" from="CanvasLayer/HBoxContainer2/VBoxContainer/room_probability" to="." method="_on_room_probability_value_changed"]
 [connection signal="pressed" from="CanvasLayer/HBoxContainer2/VBoxContainer/Button" to="." method="_on_button_pressed"]

@@ -33,9 +33,10 @@ func generate_map()-> void:
 	queue_redraw()
 
 func _draw():
-	#draw_tile_rect(MAP_DIMENSIONS,0,Vector2i(4,1))
+	draw_tile_rect(MAP_DIMENSIONS,0,Vector2i(4,1))
 	var rng = RandomNumberGenerator.new()
 	var num_rooms = 0
+	var gen_failed = 0
 	
 	var room_quantity = MAX_ROOMS 
 	
@@ -57,7 +58,7 @@ func _draw():
 			
 			var leaf = rooms[boxnum]
 			
-			if leaf.suitable:
+			if leaf.suitable and not leaf.has_room:
 			
 				num_rooms += 1
 				# Generate Rooms in each subdivided box 
@@ -66,6 +67,11 @@ func _draw():
 						if not is_inside_padding(x,y,leaf,padding):
 							leaf.has_room = true
 							TILEMAP.set_cell(Vector2i(x + leaf.position.x,y + leaf.position.y),0,Vector2i(13,1))
+			else:
+				gen_failed += 1
+				
+				if gen_failed > 10:
+					break
 		
 	draw_paths()
 	
@@ -108,20 +114,18 @@ func draw_paths():
 			# horizontal
 			for i in range(path['right'].x - path['left'].x):
 				TILEMAP.set_cell(Vector2i(path['left'].x+i,path['left'].y),0 ,Vector2i(13, 1))
+				TILEMAP.set_cell(Vector2i(path['left'].x+i,path['left'].y-1),0 ,Vector2i(13, 1))
+				TILEMAP.set_cell(Vector2i(path['left'].x+i,path['left'].y+1),0 ,Vector2i(13, 1))
 		else:
 			# vertical
 			for i in range(path['right'].y - path['left'].y):
 				TILEMAP.set_cell(Vector2i(path['left'].x,path['left'].y+i), 0, Vector2i(13, 1))
+				TILEMAP.set_cell(Vector2i(path['left'].x-1,path['left'].y+i), 0, Vector2i(13, 1))
+				TILEMAP.set_cell(Vector2i(path['left'].x+1,path['left'].y+i), 0, Vector2i(13, 1))
 
 
 func _on_button_pressed() -> void:
 	generate_map() # Replace with function body.
-
-
-func _on_max_rooms_slider_value_changed(value: float) -> void:
-	MAX_ROOMS = int(value)
-	max_rooms_text.text = "Max Rooms: " + str(MAX_ROOMS)
-
 
 func _on_map_width_box_text_changed(new_text: String) -> void:
 	if not int(new_text):
@@ -145,3 +149,13 @@ func _on_subdivison_slider_value_changed(value: float) -> void:
 func _on_room_probability_value_changed(value: float) -> void:
 	ROOM_PROBABILITY = int(value)
 	room_probabilty_text.text = "Room Probability: " + str(int(ROOM_PROBABILITY)) + "%"
+
+
+func _on_room_quantity_text_changed(new_text: String) -> void:
+	if not int(new_text):
+		return
+	
+	if int(new_text) > 2500 or int(new_text) < 0:
+		return
+	
+	MAX_ROOMS = int(new_text)
