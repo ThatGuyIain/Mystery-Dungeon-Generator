@@ -70,7 +70,7 @@ func _draw():
 			else:
 				gen_failed += 1
 				
-				if gen_failed > 10:
+				if gen_failed > 50:
 					break
 		
 	draw_paths()
@@ -88,7 +88,7 @@ func draw_tile_rect(dimensions: Vector2i, source_id: int, atlas_coords: Vector2i
 
 func make_room_array():
 	for leaf in root_node.get_leaves():
-		if leaf.size.y < 3 and leaf.size.x < 3:
+		if leaf.size.y < 6 and leaf.size.x < 6:
 			leaf.suitable = false
 			
 		rooms.push_back(leaf)
