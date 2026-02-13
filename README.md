@@ -28,3 +28,11 @@ Controls the amount of times the program divides the map space into useable room
 
 Controls the probability of rooms spawning. Gives some variation in map generation by changing the range of rooms that can be generated.
 
+## Known Limitations
+
+There are currently quite a few known limitations:
+
+1. Path generation is done through each subdivision rather from room to room. This means that paths follow a very similar pattern across each generation with very little variation
+2. Subdivision depth isn't constrained to creating plausable room spaces. This results in cases where rooms generate into long constrained corridors or creates spaces in which room generation isn't possible.
+3. Path generation gets really funky beyond a certain point when doing a deep subdivision. This is primarily due to map constraints and the way paths are created between rooms. In some circumstances, paths will generate tiles that exceed the map's bounds.
+    
