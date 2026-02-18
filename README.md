@@ -35,4 +35,9 @@ There are currently quite a few known limitations:
 1. Path generation is done through each subdivision rather from room to room. This means that paths follow a very similar pattern across each generation with very little variation
 2. Subdivision depth isn't constrained to creating plausable room spaces. This results in cases where rooms generate into long constrained corridors or creates spaces in which room generation isn't possible.
 3. Path generation gets really funky beyond a certain point when doing a deep subdivision. This is primarily due to map constraints and the way paths are created between rooms. In some circumstances, paths will generate tiles that exceed the map's bounds.
-    
+
+## How to run/access 
+
+Currently, the project is not available on Itch.io. I intend to publish this to Itch in the future and the link will be posted here when I do so.
+
+The way you can access it currently is by downloading a build from the Build folder. I have provided a windows and a mac build, as well as an HTML build(that may or may not work)-
